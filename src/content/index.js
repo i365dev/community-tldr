@@ -1,5 +1,4 @@
-// src/content/index.js
-import { HNParser } from './hn/parser';
+import { getParser, isSupportedSite } from './parsers/registry';
 
 // Simple markdown renderer
 const renderMarkdown = (text) => {
@@ -19,7 +18,12 @@ const renderMarkdown = (text) => {
 
 class ContentScript {
     constructor() {
-        this.parser = new HNParser();
+        if (!isSupportedSite()) {
+            console.log('Site not supported');
+            return;
+        }
+        
+        this.parser = getParser();
         this.sidebarVisible = false;
         this.threadSummaries = new Map();
         this.settings = null;
