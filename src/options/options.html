@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Community TL;DR Settings</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-50">
+    <div class="min-h-screen py-8">
+        <div class="max-w-3xl mx-auto bg-white rounded-lg shadow">
+            <div class="px-6 py-4 border-b border-gray-200">
+                <h1 class="text-xl font-semibold text-gray-800">Community TL;DR Settings</h1>
+            </div>
+
+            <div class="p-6 space-y-6">
+                <!-- AI Provider Configuration -->
+                <div class="space-y-4">
+                    <h2 class="text-lg font-medium text-gray-700">AI Provider Configuration</h2>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">
+                            Select AI Provider
+                        </label>
+                        <select id="aiProvider" class="w-full border border-gray-300 rounded-md shadow-sm px-3 py-2">
+                            <option value="custom">Custom Endpoint</option>
+                            <option value="openai">OpenAI</option>
+                            <option value="anthropic">Anthropic (Claude)</option>
+                            <option value="cloudflare">Cloudflare AI Worker</option>
+                        </select>
+                    </div>
+
+                    <!-- Dynamic Provider Settings -->
+                    <div id="providerSettings" class="space-y-4">
+                        <!-- Will be populated by JavaScript -->
+                    </div>
+                </div>
+
+                <!-- Summary Preferences -->
+                <div class="space-y-4">
+                    <h2 class="text-lg font-medium text-gray-700">Summary Preferences</h2>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">
+                            Summary Language
+                        </label>
+                        <select id="language" class="w-full border border-gray-300 rounded-md shadow-sm px-3 py-2">
+                            <option value="english">English</option>
+                            <option value="chinese">Chinese (中文)</option>
+                            <option value="japanese">Japanese (日本語)</option>
+                            <option value="korean">Korean (한국어)</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">
+                            Summary Length
+                        </label>
+                        <select id="summaryLength" class="w-full border border-gray-300 rounded-md shadow-sm px-3 py-2">
+                            <option value="short">Short (2-3 key points)</option>
+                            <option value="medium">Medium (4-5 key points)</option>
+                            <option value="long">Long (6+ key points)</option>
+                        </select>
+                    </div>
+
+                    <div class="flex items-center">
+                        <input type="checkbox" id="autoSummarize" class="h-4 w-4 text-blue-600 border-gray-300 rounded">
+                        <label class="ml-2 block text-sm text-gray-700">
+                            Auto-summarize long threads while scrolling
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Customization -->
+                <div class="space-y-4">
+                    <h2 class="text-lg font-medium text-gray-700">Customization</h2>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">
+                            Custom Prompt Template (Optional)
+                        </label>
+                        <textarea
+                            id="promptTemplate"
+                            class="w-full border border-gray-300 rounded-md shadow-sm px-3 py-2 h-24"
+                            placeholder="Enter your custom prompt template. Use {text} as placeholder for content. Leave empty to use default template."
+                        ></textarea>
+                    </div>
+                </div>
+
+                <!-- Communities -->
+                <div class="space-y-4">
+                    <h2 class="text-lg font-medium text-gray-700">Supported Communities</h2>
+                    
+                    <div class="space-y-2">
+                        <div class="flex items-center">
+                            <input type="checkbox" id="enableHN" class="h-4 w-4 text-blue-600 border-gray-300 rounded" checked disabled>
+                            <label class="ml-2 block text-sm text-gray-700">
+                                Hacker News
+                            </label>
+                        </div>
+                        
+                        <div class="flex items-center">
+                            <input type="checkbox" id="enableReddit" class="h-4 w-4 text-blue-600 border-gray-300 rounded" disabled>
+                            <label class="ml-2 block text-sm text-gray-700">
+                                Reddit (Coming Soon)
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="px-6 py-4 bg-gray-50 border-t border-gray-200 rounded-b-lg">
+                <div class="flex justify-between items-center">
+                    <span id="saveStatus" class="text-sm text-gray-500"></span>
+                    <button id="saveSettings" class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+                        Save Settings
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="options.js"></script>
+</body>
+</html>
