@@ -1,6 +1,42 @@
 import { BaseParser } from './base';
+import { log } from '../utils/logger';
 
 export class HNParser extends BaseParser {
+    constructor() {
+        super();
+        this.initialized = false;
+    }
+
+    async initialize() {
+        if (this.initialized) return;
+
+        try {
+            // Wait for content to be ready
+            await this.waitForContent();
+            this.initialized = true;
+            log.info('HN Parser initialized');
+        } catch (error) {
+            log.error('Error initializing HN Parser:', error);
+        }
+    }
+
+    async waitForContent() {
+        // Wait for essential elements
+        await new Promise((resolve) => {
+            const check = () => {
+                const hasTitle = !!this.getTitle();
+                const hasComments = document.querySelector('.comment-tree') !== null;
+
+                if (hasTitle && hasComments) {
+                    resolve();
+                } else {
+                    setTimeout(check, 100);
+                }
+            };
+            check();
+        });
+    }
+
     isDiscussionPage() {
         return window.location.pathname.startsWith('/item');
     }
@@ -10,6 +46,51 @@ export class HNParser extends BaseParser {
                document.querySelector('.titleline a')?.textContent || 
                'Hacker News Discussion';
     }
+
+    getTopLevelComments() {
+        return Array.from(document.querySelectorAll('.comment-tree > tbody > tr.athing.comtr'));
+    }
+
+    parseCommentThread(rootComment) {
+        if (!rootComment?.classList?.contains('comtr')) {
+            log.warn('Invalid comment element provided');
+            return null;
+        }
+    
+        const thread = {
+            id: rootComment.id,
+            root: this.parseComment(rootComment),
+            replies: [],
+            level: this.getCommentIndent(rootComment),
+        };
+    
+        let currentElement = rootComment.nextElementSibling;
+        const rootIndent = thread.level;
+    
+        while (currentElement) {
+            const isComment = currentElement.classList.contains('comtr');
+            if (!isComment) {
+                currentElement = currentElement.nextElementSibling;
+                continue;
+            }
+    
+            const currentIndent = this.getCommentIndent(currentElement);
+    
+            if (currentIndent <= rootIndent) {
+                break;
+            }
+    
+            const reply = this.parseComment(currentElement);
+            if (reply) {
+                reply.level = currentIndent - rootIndent;
+                thread.replies.push(reply);
+            }
+    
+            currentElement = currentElement.nextElementSibling;
+        }
+    
+        return thread;
+    }    
 
     getPageContent() {
         if (!this.isDiscussionPage()) {
@@ -25,10 +106,8 @@ export class HNParser extends BaseParser {
             time: document.querySelector('.age')?.textContent
         };
 
-        // Get all comments
-        const threads = this.getTopLevelComments().map(comment => 
-            this.parseCommentThread(comment)
-        );
+        // Get and process all comments in a single pass
+        const threads = this.processComments();
 
         return {
             mainPost,
@@ -36,55 +115,35 @@ export class HNParser extends BaseParser {
         };
     }
 
-    getTopLevelComments() {
-        // Get top-level comments
-        return Array.from(
-            document.querySelectorAll('.comment-tree > tbody > tr.athing.comtr')
-        );
-    }
+    processComments() {
+        // Process top-level comments and nested threads in a single pass
+        const comments = [];
+        const commentElements = Array.from(document.querySelectorAll('.comment-tree > tbody > tr.athing.comtr'));
 
-    parseCommentThread(rootComment) {
-        if (!rootComment?.classList?.contains('comtr')) {
-            console.warn('Invalid comment element provided');
-            return null;
-        }
+        let currentThread = null;
+        commentElements.forEach((commentElement) => {
+            const currentIndent = this.getCommentIndent(commentElement);
 
-        const thread = {
-            id: rootComment.id,
-            root: this.parseComment(rootComment),
-            replies: [],
-            level: 0
-        };
-
-        // Get all replies
-        let currentElement = rootComment.nextElementSibling;
-        const rootIndent = this.getCommentIndent(rootComment);
-        
-        while (currentElement) {
-            const isComment = currentElement.classList.contains('comtr');
-            if (!isComment) {
-                currentElement = currentElement.nextElementSibling;
-                continue;
+            if (!currentThread || currentIndent === 0) {
+                // Start a new thread if we are at top-level or after ending a previous thread
+                currentThread = {
+                    id: commentElement.id,
+                    root: this.parseComment(commentElement),
+                    replies: [],
+                    level: 0
+                };
+                comments.push(currentThread);
+            } else if (currentThread && currentIndent > currentThread.level) {
+                // Add nested comments to the current thread based on indentation level
+                const reply = this.parseComment(commentElement);
+                if (reply) {
+                    reply.level = currentIndent - currentThread.level;
+                    currentThread.replies.push(reply);
+                }
             }
+        });
 
-            const currentIndent = this.getCommentIndent(currentElement);
-            
-            // If indentation is less than or equal to root, it's a new thread
-            if (currentIndent <= rootIndent) {
-                break;
-            }
-
-            // Add reply to thread
-            const reply = this.parseComment(currentElement);
-            if (reply) {
-                reply.level = currentIndent - rootIndent;
-                thread.replies.push(reply);
-            }
-
-            currentElement = currentElement.nextElementSibling;
-        }
-
-        return thread;
+        return comments;
     }
 
     parseComment(commentElement) {
@@ -101,7 +160,7 @@ export class HNParser extends BaseParser {
             by: userElement?.textContent || '',
             time: ageElement?.getAttribute('title') || ageElement?.textContent || '',
             score: scoreElement?.textContent || '',
-            element: commentElement,  // Keep DOM reference for later use
+            element: commentElement,
             level: this.getCommentIndent(commentElement)
         };
     }
@@ -120,6 +179,21 @@ export class HNParser extends BaseParser {
         if (comment) {
             comment.scrollIntoView({ behavior: 'smooth', block: 'center' });
             this.highlightComment(comment);
+
+            // Add specific HN highlight style
+            comment.style.backgroundColor = '#f6f6ef';
+            comment.style.borderLeft = '3px solid #ff6600';
+            
+            // Remove highlight after 3 seconds
+            setTimeout(() => {
+                comment.style.backgroundColor = '';
+                comment.style.borderLeft = '';
+            }, 3000);
         }
+    }
+
+    destroy() {
+        // Remove any added styles or elements
+        document.getElementById('highlight-styles')?.remove();
     }
 }

@@ -39,32 +39,49 @@ class PopupManager {
 
     async updateUI() {
         try {
-            // Check if current page is HN
-            const isHN = this.currentTab.url.includes('news.ycombinator.com');
+            // Check if current page is supported
+            const hostname = this.currentTab.url.toLowerCase();
+            const isHN = hostname.includes('news.ycombinator.com');
+            const isReddit = hostname.includes('reddit.com');
+            const isSupportedSite = isHN || isReddit;
             
             // Update UI visibility
             document.getElementById('notOnCommunity').style.display = 
-                isHN ? 'none' : 'block';
+                isSupportedSite ? 'none' : 'block';
             
             document.getElementById('onCommunity').style.display = 
-                isHN ? 'block' : 'none';
+                isSupportedSite ? 'block' : 'none';
 
-            if (isHN) {
+            if (isSupportedSite) {
                 try {
                     // Get page info from content script
-                    const pageInfo = await this.sendMessageToTab('getPageInfo');
+                    const response = await this.sendMessageToTab('getPageInfo');
+                    console.log('Page info response:', response);
+
+                    if (!response.success) {
+                        throw new Error(response.error || 'Failed to get page info');
+                    }
+                    
+                    const pageInfo = response.data;
                     console.log('Page info:', pageInfo);
                     
                     // Update page type display
                     document.getElementById('pageType').textContent = 
                         pageInfo.isDiscussion ? 'Discussion' : 'Listing';
 
-                    // Update button visibility
+                    // Update button visibility based on page type
+                    const canSummarize = pageInfo.isDiscussion;
                     document.getElementById('summarizeBtn').style.display = 
-                        pageInfo.isDiscussion ? 'block' : 'none';
+                        canSummarize ? 'block' : 'none';
                     
                     document.getElementById('toggleSidebarBtn').style.display = 
-                        pageInfo.isDiscussion ? 'block' : 'none';
+                        canSummarize ? 'block' : 'none';
+
+                    // Update thread info if available
+                    const threadInfo = document.getElementById('threadInfo');
+                    if (threadInfo && pageInfo.title) {
+                        threadInfo.textContent = pageInfo.title;
+                    }
                 } catch (error) {
                     console.error('Error getting page info:', error);
                     this.showError('Could not get page information. Please refresh the page.');
@@ -78,24 +95,38 @@ class PopupManager {
 
     async handleSummarize() {
         try {
+            const summarizeBtn = document.getElementById('summarizeBtn');
+            summarizeBtn.disabled = true;
             this.setStatus('Generating summary...', true);
+
+            await this.sendMessageToTab('toggleSidebar');
+
+            console.log('Sending summarize message to tab:', this.currentTab?.id);
             const response = await this.sendMessageToTab('summarize');
+            console.log('Received summarize response:', response);
+
+            if (!response) {
+                throw new Error('No response received from content script');
+            }
             
             if (response.success) {
-                this.setStatus('Summary generated!');
-                setTimeout(() => this.clearStatus(), 2000);
+                console.log('Summary generated successfully');
+                window.close();
             } else {
                 throw new Error(response.error || 'Failed to generate summary');
             }
         } catch (error) {
             console.error('Summarization error:', error);
             this.showError(error.message);
+            document.getElementById('summarizeBtn').disabled = false;
         }
     }
+
 
     async handleToggleSidebar() {
         try {
             await this.sendMessageToTab('toggleSidebar');
+            window.close();
         } catch (error) {
             console.error('Toggle sidebar error:', error);
             this.showError('Could not toggle sidebar');
@@ -108,8 +139,12 @@ class PopupManager {
         }
         
         try {
+            console.log(`Sending message to tab ${this.currentTab.id}:`, { action, data });
             const response = await chrome.tabs.sendMessage(this.currentTab.id, { action, ...data });
-            return response;
+            console.log(`Received response for ${action}:`, response);
+            
+            // 添加默认响应对象
+            return response || { success: true };
         } catch (error) {
             console.error('Message send error:', error);
             throw new Error('Could not communicate with the page. Please refresh and try again.');
@@ -117,13 +152,14 @@ class PopupManager {
     }
 
     setStatus(message, loading = false) {
+        console.log('Setting status:', { message, loading });
         const statusMessage = document.getElementById('statusMessage');
         const statusText = document.getElementById('statusText');
+        const spinner = statusMessage?.querySelector('svg');
         
         if (statusMessage && statusText) {
             statusText.textContent = message;
             statusMessage.classList.toggle('hidden', !message);
-            const spinner = statusMessage.querySelector('svg');
             if (spinner) {
                 spinner.classList.toggle('hidden', !loading);
             }
@@ -135,6 +171,7 @@ class PopupManager {
     }
 
     showError(message) {
+        console.error('Showing error:', message);
         this.setStatus(`Error: ${message}`);
         setTimeout(() => this.clearStatus(), 3000);
     }

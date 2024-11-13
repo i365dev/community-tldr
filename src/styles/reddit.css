@@ -1,0 +1,73 @@
+/* Reddit TL;DR button styles */
+.tldr-button {
+    background: none !important;
+    border: none !important;
+    color: #878a8c !important;
+    font-size: 12px !important;
+    font-weight: bold !important;
+    margin-left: 8px !important;
+    cursor: pointer !important;
+    padding: 4px 8px !important;
+    text-transform: uppercase !important;
+}
+
+.tldr-button:hover {
+    color: #0079d3 !important;
+    background-color: rgba(0, 121, 211, 0.1) !important;
+    border-radius: 4px !important;
+}
+
+/* Reddit comment highlight styles */
+shreddit-comment .highlight {
+    background-color: rgba(0, 121, 211, 0.05) !important;
+    border-left: 3px solid #0079d3 !important;
+    margin-left: -3px !important;
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+    .tldr-button {
+        color: #818384 !important;
+    }
+
+    .tldr-button:hover {
+        color: #d7dadc !important;
+        background-color: rgba(215, 218, 220, 0.1) !important;
+    }
+
+    shreddit-comment .highlight {
+        background-color: rgba(0, 121, 211, 0.1) !important;
+    }
+}
+
+/* Loading indicator for Reddit */
+.reddit-loading {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border: 2px solid rgba(0, 121, 211, 0.2);
+    border-top-color: #0079d3;
+    border-radius: 50%;
+    animation: reddit-spin 1s linear infinite;
+}
+
+@keyframes reddit-spin {
+    to { transform: rotate(360deg); }
+}
+
+shreddit-post::part(action-button),
+shreddit-comment::part(action-button) {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--color-tone-1);
+    background: none;
+    border: none;
+    padding: 4px 8px;
+    cursor: pointer;
+    margin-left: 8px;
+}
+
+:host {
+    --tldr-button-color: #878a8c;
+    --tldr-button-hover-color: #0079d3;
+}

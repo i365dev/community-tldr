@@ -16,6 +16,15 @@ module.exports = {
     filename: '[name].js',
     clean: true
   },
+  resolve: {
+    extensions: ['.js'],
+    alias: {
+      '@': path.resolve(__dirname, 'src'),
+      'utils': path.resolve(__dirname, 'src/utils'),
+      'services': path.resolve(__dirname, 'src/services'),
+      'components': path.resolve(__dirname, 'src/components')
+    }
+  },
   module: {
     rules: [
       {
@@ -24,7 +33,19 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ['@babel/preset-env']
+            presets: [
+              ['@babel/preset-env', {
+                targets: {
+                  chrome: "88"
+                },
+                useBuiltIns: 'usage',
+                corejs: 3
+              }]
+            ],
+            plugins: [
+              "@babel/plugin-proposal-class-properties",
+              "@babel/plugin-transform-runtime"
+            ]
           }
         }
       },
@@ -50,7 +71,8 @@ module.exports = {
         },
         {
           from: "src/styles",
-          to: "styles"
+          to: "styles",
+          noErrorOnMissing: true
         },
         {
           from: "public/manifest.json",

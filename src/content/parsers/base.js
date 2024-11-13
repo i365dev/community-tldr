@@ -5,6 +5,12 @@ export class BaseParser {
         }
     }
 
+    // Optional initialization method
+    async initialize() {
+        // Default empty implementation
+        return Promise.resolve();
+    }
+
     // Check if current page is a discussion
     isDiscussionPage() {
         throw new Error('Method isDiscussionPage() must be implemented');
@@ -32,7 +38,13 @@ export class BaseParser {
 
     // Scroll to specific comment
     scrollToComment(commentId) {
-        throw new Error('Method scrollToComment() must be implemented');
+        if (!commentId) return;
+        
+        const comment = document.getElementById(commentId);
+        if (comment) {
+            comment.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            this.highlightComment(comment);
+        }
     }
 
     // Highlight specific comment
@@ -44,12 +56,31 @@ export class BaseParser {
             el.classList.remove('comment-highlight')
         );
         
-        // Add highlight to target comment
+        // Add new highlight
         commentElement.classList.add('comment-highlight');
+
+        // Add highlight styles if they don't exist
+        if (!document.getElementById('highlight-styles')) {
+            const style = document.createElement('style');
+            style.id = 'highlight-styles';
+            style.textContent = `
+                .comment-highlight {
+                    background-color: rgba(255, 255, 0, 0.2) !important;
+                    border-left: 3px solid #f90 !important;
+                    transition: all 0.3s ease;
+                }
+            `;
+            document.head.appendChild(style);
+        }
     }
 
     // Get comment indentation level
     getCommentIndent(commentElement) {
         throw new Error('Method getCommentIndent() must be implemented');
+    }
+
+    // Optional method to handle cleanup
+    destroy() {
+        // Default empty implementation
     }
 }

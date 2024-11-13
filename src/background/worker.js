@@ -125,11 +125,11 @@ async function callCustomEndpoint(settings, requestData) {
 function getSummaryLength(length) {
     switch (length) {
         case 'short':
-            return 150;
+            return 200;
         case 'medium':
-            return 300;
-        case 'long':
             return 500;
+        case 'long':
+            return 1024;
         default:
             return 300;
     }

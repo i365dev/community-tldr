@@ -24,9 +24,9 @@ A Chrome extension powered by AI to generate quick summaries of community discus
 
 Currently supported:
 - ✅ Hacker News discussions
+- ✅ Reddit
 
 Coming soon:
-- 🔄 Reddit
 - 🔄 Stack Overflow
 - 🔄 GitHub Discussions
 - More suggestions welcome!
