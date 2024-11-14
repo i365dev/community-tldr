@@ -156,6 +156,10 @@ export class HNParser extends BaseParser {
         }
     }
 
+    setContentScript(contentScript) {
+        this.contentScript = contentScript;
+    }
+
     destroy() {
         // Remove any added styles or elements
         document.getElementById('highlight-styles')?.remove();

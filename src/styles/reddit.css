@@ -1,0 +1,49 @@
+.tldr-summarize-btn {
+    display: inline-block;
+    margin-left: 10px;
+    font-size: 12px;
+    color: #666;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.tldr-summarize-btn:hover {
+    color: #1a1a1b;
+    text-decoration: underline;
+}
+
+.tldr-highlight {
+    animation: tldrHighlight 3s ease-out;
+}
+
+@keyframes tldrHighlight {
+    0% {
+        background-color: rgba(255, 102, 0, 0.2);
+    }
+    70% {
+        background-color: rgba(255, 102, 0, 0.2);
+    }
+    100% {
+        background-color: transparent;
+    }
+}
+
+.tldr-summarize-btn {
+    display: inline-block;
+    margin-left: 10px;
+    color: #666;
+    font-size: 12px;
+    cursor: pointer;
+    text-decoration: none;
+    user-select: none;
+}
+
+.tldr-summarize-btn:hover {
+    color: #ff4500;
+    text-decoration: none;
+}
+
+.tldr-btn-container {
+    display: inline-block;
+    vertical-align: middle;
+}

@@ -23,11 +23,14 @@ A Chrome extension powered by AI to generate quick summaries of community discus
 ## Supported Communities
 
 Currently supported:
+
 - ✅ Hacker News discussions
+- ✅ Reddit
 
 Coming soon:
-- 🔄 Reddit
-- 🔄 Stack Overflow
+
+- 🔄 Twitter threads
+- 🔄 Slack channels
 - 🔄 GitHub Discussions
 - More suggestions welcome!
 

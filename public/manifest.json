@@ -29,6 +29,7 @@
   
     "host_permissions": [
       "https://news.ycombinator.com/*",
+      "*://*.reddit.com/*",
       "https://api.openai.com/*",
       "https://api.anthropic.com/*",
       "https://*.workers.dev/*"
@@ -37,10 +38,15 @@
     "content_scripts": [
       {
         "matches": [
-          "https://news.ycombinator.com/*"
+          "https://news.ycombinator.com/*",
+          "https://*.reddit.com/*"
         ],
         "js": ["content.js"],
-        "css": ["styles/content.css"]
+        "css": [
+          "styles/content.css",
+          "styles/hn.css",
+          "styles/reddit.css"
+        ]
       }
     ],
   
@@ -51,6 +57,9 @@
   
     "web_accessible_resources": [{
       "resources": ["styles/*", "icons/*"],
-      "matches": ["https://news.ycombinator.com/*"]
+      "matches": [
+        "https://news.ycombinator.com/*",
+        "https://*.reddit.com/*"
+      ]
     }]
   }

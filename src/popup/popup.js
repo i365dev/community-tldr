@@ -39,35 +39,37 @@ class PopupManager {
 
     async updateUI() {
         try {
-            // Check if current page is HN
+            // Check if current page is supported
             const isHN = this.currentTab.url.includes('news.ycombinator.com');
+            const isReddit = this.currentTab.url.includes('reddit.com');
+            const isSupportedSite = isHN || isReddit;
             
             // Update UI visibility
             document.getElementById('notOnCommunity').style.display = 
-                isHN ? 'none' : 'block';
+                isSupportedSite ? 'none' : 'block';
             
             document.getElementById('onCommunity').style.display = 
-                isHN ? 'block' : 'none';
+                isSupportedSite ? 'block' : 'none';
 
-            if (isHN) {
+            if (isSupportedSite) {
                 try {
                     // Get page info from content script
                     const pageInfo = await this.sendMessageToTab('getPageInfo');
                     console.log('Page info:', pageInfo);
                     
-                    // Update page type
+                    // Update page type and title
                     const pageTypeElement = document.getElementById('pageType');
+                    const pageTitleElement = document.getElementById('pageTitle');
+                    
                     if (pageTypeElement) {
                         pageTypeElement.textContent = pageInfo.isDiscussion ? 'Discussion' : 'Listing';
                     }
-
-                    // Update page title
-                    const pageTitleElement = document.getElementById('pageTitle');
+                    
                     if (pageTitleElement) {
                         pageTitleElement.textContent = pageInfo.title || 'Untitled';
                     }
 
-                    // Update button visibility
+                    // Update button visibility based on page type
                     document.getElementById('summarizeBtn').style.display = 
                         pageInfo.isDiscussion ? 'block' : 'none';
                     
