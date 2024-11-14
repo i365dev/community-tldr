@@ -43,3 +43,15 @@ body {
 ::-webkit-scrollbar-thumb:hover {
     background: #666;
 }
+
+.line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    word-break: break-word;
+}
+
+.break-words {
+    word-break: break-word;
+}

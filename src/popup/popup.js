@@ -55,9 +55,17 @@ class PopupManager {
                     const pageInfo = await this.sendMessageToTab('getPageInfo');
                     console.log('Page info:', pageInfo);
                     
-                    // Update page type display
-                    document.getElementById('pageType').textContent = 
-                        pageInfo.isDiscussion ? 'Discussion' : 'Listing';
+                    // Update page type
+                    const pageTypeElement = document.getElementById('pageType');
+                    if (pageTypeElement) {
+                        pageTypeElement.textContent = pageInfo.isDiscussion ? 'Discussion' : 'Listing';
+                    }
+
+                    // Update page title
+                    const pageTitleElement = document.getElementById('pageTitle');
+                    if (pageTitleElement) {
+                        pageTitleElement.textContent = pageInfo.title || 'Untitled';
+                    }
 
                     // Update button visibility
                     document.getElementById('summarizeBtn').style.display = 

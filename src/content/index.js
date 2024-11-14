@@ -127,31 +127,59 @@ class ContentScript {
             
             this.updateSidebarContent({ 
                 loading: true, 
-                message: 'Analyzing main post...' 
+                message: 'Analyzing discussion...' 
             });
             
             sidebar.classList.add('visible');
             this.sidebarVisible = true;
-
+    
             const content = this.parser.getPageContent();
             if (!content) {
                 throw new Error('Could not extract page content');
             }
             
-            // Summarize main post
-            const mainPostSummary = await this.summarizeContent({
-                type: 'main_post',
-                title: content.mainPost.title,
-                text: content.mainPost.text || content.mainPost.url,
-                url: content.mainPost.url
+            // Build complete discussion content
+            let fullDiscussion = '';
+            
+            // Add main post information
+            if (content.mainPost) {
+                fullDiscussion += `Title: ${content.mainPost.title}\n`;
+                if (content.mainPost.url) fullDiscussion += `URL: ${content.mainPost.url}\n`;
+                if (content.mainPost.by) fullDiscussion += `Author: ${content.mainPost.by}\n`;
+                if (content.mainPost.text) fullDiscussion += `\nContent:\n${content.mainPost.text}\n`;
+            }
+            
+            // Add comments
+            if (content.threads && content.threads.length > 0) {
+                fullDiscussion += '\n\nDiscussion:\n';
+                content.threads.forEach((thread, index) => {
+                    // Add top-level comment
+                    if (thread.root) {
+                        fullDiscussion += `\n[${thread.root.by || 'anonymous'}]: ${thread.root.text || ''}\n`;
+                        
+                        // Add replies
+                        if (thread.replies && thread.replies.length > 0) {
+                            thread.replies.forEach(reply => {
+                                const indent = '  '.repeat(reply.level || 1);
+                                fullDiscussion += `${indent}↳ [${reply.by || 'anonymous'}]: ${reply.text || ''}\n`;
+                            });
+                        }
+                    }
+                });
+            }
+    
+            // Send complete content for summarization
+            const summary = await this.summarizeContent({
+                content: fullDiscussion,
+                type: 'discussion'
             });
-
-            // Update sidebar with summary
+    
+            // Update sidebar display
             this.updateSidebarContent({
                 type: 'main_post',
-                title: content.mainPost.title,
-                summary: mainPostSummary,
-                threadCount: this.parser.getTopLevelComments().length
+                title: content.mainPost?.title || 'Discussion',
+                summary: summary,
+                threadCount: content.threads?.length || 0
             });
             
             return { success: true };
@@ -164,22 +192,14 @@ class ContentScript {
             throw error;
         }
     }
-
+    
     async summarizeContent(data) {
         try {
-            // Prepare thread content for summarization
-            const threadContent = `
-    Title: ${data.title || 'No Title'}
-    Content: ${data.text || 'No Content'}
-            `.trim();
-    
-            // Send summarization request to background worker
             const response = await chrome.runtime.sendMessage({
                 type: 'SUMMARIZE',
                 data: {
-                    content: threadContent,
+                    content: data.content,
                     type: data.type,
-                    url: data.url,
                     language: this.settings?.language || 'chinese'
                 }
             });
