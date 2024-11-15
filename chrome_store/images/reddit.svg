@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1280" height="800" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Background -->
+    <rect width="1280" height="800" fill="#1A1A1B"/>
+    
+    <!-- Left side content -->
+    <g transform="translate(80, 100)">
+        <text font-family="Arial, sans-serif" font-size="48" fill="#FFFFFF" font-weight="bold">
+            Reddit Discussions Made Easy
+        </text>
+        
+        <text font-family="Arial, sans-serif" font-size="24" fill="#FF4500" y="50">
+            Instant summaries for Reddit threads
+        </text>
+        
+        <g transform="translate(0, 120)">
+            <g transform="translate(0, 0)">
+                <circle cx="12" cy="12" r="6" fill="#FF4500"/>
+                <text font-family="Arial, sans-serif" font-size="20" fill="#FFFFFF" x="35" y="18">
+                    One-click thread analysis
+                </text>
+            </g>
+            
+            <g transform="translate(0, 50)">
+                <circle cx="12" cy="12" r="6" fill="#FF4500"/>
+                <text font-family="Arial, sans-serif" font-size="20" fill="#FFFFFF" x="35" y="18">
+                    Smart comment summarization
+                </text>
+            </g>
+            
+            <g transform="translate(0, 100)">
+                <circle cx="12" cy="12" r="6" fill="#FF4500"/>
+                <text font-family="Arial, sans-serif" font-size="20" fill="#FFFFFF" x="35" y="18">
+                    Reddit-native experience
+                </text>
+            </g>
+        </g>
+    </g>
+    
+    <!-- Screenshot area -->
+    <g transform="translate(640, 100)">
+        <!-- Container with clip path -->
+        <defs>
+            <clipPath id="screenshotClip">
+                <rect width="560" height="400" rx="4"/>
+            </clipPath>
+        </defs>
+        
+        <!-- Background frame -->
+        <rect width="560" height="400" rx="4" fill="#272729"/>
+        
+        <!-- Your screenshot here -->
+        <image 
+            x="0" 
+            y="0" 
+            width="560" 
+            height="400" 
+            clip-path="url(#screenshotClip)"
+            xlink:href="./reddit.jpg"
+            preserveAspectRatio="xMidYMid contain"
+        />
+        
+        <!-- Optional overlay for better text visibility -->
+        <rect width="560" height="40" rx="4" fill="#343536" opacity="0.9"/>
+    </g>
+    
+    <!-- Footer -->
+    <text font-family="Arial, sans-serif" font-size="20" fill="#818384" x="640" y="750" text-anchor="middle">
+        Never miss key insights in long Reddit threads
+    </text>
+</svg>

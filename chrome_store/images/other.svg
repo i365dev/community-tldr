@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1280" height="800" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Background -->
+    <rect width="1280" height="800" fill="#2C3E50"/>
+    
+    <!-- Left side content -->
+    <g transform="translate(80, 100)">
+        <text font-family="Arial, sans-serif" font-size="48" fill="#FFFFFF" font-weight="bold">
+            跨语言社区讨论助手
+        </text>
+        
+        <text font-family="Arial, sans-serif" font-size="24" fill="#3498DB" y="50">
+            一键获取多语言讨论要点
+        </text>
+        
+        <g transform="translate(0, 120)">
+            <g transform="translate(0, 0)">
+                <circle cx="12" cy="12" r="6" fill="#3498DB"/>
+                <text font-family="Arial, sans-serif" font-size="20" fill="#FFFFFF" x="35" y="18">
+                    支持中文、英文等多语言总结
+                </text>
+            </g>
+            
+            <g transform="translate(0, 50)">
+                <circle cx="12" cy="12" r="6" fill="#3498DB"/>
+                <text font-family="Arial, sans-serif" font-size="20" fill="#FFFFFF" x="35" y="18">
+                    快速理解英文社区讨论
+                </text>
+            </g>
+            
+            <g transform="translate(0, 100)">
+                <circle cx="12" cy="12" r="6" fill="#3498DB"/>
+                <text font-family="Arial, sans-serif" font-size="20" fill="#FFFFFF" x="35" y="18">
+                    智能多语言转换
+                </text>
+            </g>
+        </g>
+    </g>
+    
+    <!-- Screenshot area with split screen -->
+    <g transform="translate(640, 100)">
+        <!-- Container -->
+        <rect width="560" height="400" rx="8" fill="#FFFFFF"/>
+        
+        <!-- Left side (English) -->
+        <g>
+            <rect x="0" y="0" width="275" height="400" rx="4" fill="#F6F6EF"/>
+            <image 
+                x="0" 
+                y="0" 
+                width="550" 
+                height="800"
+                xlink:href="hn.jpg"
+                preserveAspectRatio="xMaxYMax slice"
+            />
+        </g>
+
+        <!-- Right side (Chinese) -->
+        <g transform="translate(285, 0)">
+            <rect x="0" y="0" width="275" height="400" rx="4" fill="#F6F6EF"/>
+            <image 
+                x="0" 
+                y="0" 
+                width="550" 
+                height="800"
+                xlink:href="other.jpg"
+                preserveAspectRatio="xMaxYMax slice"
+            />
+        </g>
+
+        <!-- Divider -->
+        <rect x="275" y="0" width="10" height="400" fill="#2C3E50" opacity="0.1"/>
+        
+        <!-- Labels -->
+        <text x="137.5" y="20" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#666">Original</text>
+        <text x="422.5" y="20" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#666">中文总结</text>
+    </g>
+    
+    <!-- Footer -->
+    <text font-family="Arial, sans-serif" font-size="20" fill="#ECF0F1" x="640" y="750" text-anchor="middle">
+        突破语言障碍，链接全球社区讨论
+    </text>
+</svg>

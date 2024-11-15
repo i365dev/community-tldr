@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1280" height="800" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Background -->
+    <rect width="1280" height="800" fill="#FF6600"/>
+    
+    <!-- Left side content -->
+    <g transform="translate(80, 100)">
+        <text font-family="Arial, sans-serif" font-size="48" fill="#FFFFFF" font-weight="bold">
+            HN Discussion Summaries
+        </text>
+        
+        <text font-family="Arial, sans-serif" font-size="24" fill="#F6F6EF" y="50">
+            Essential insights from technical discussions
+        </text>
+        
+        <g transform="translate(0, 120)">
+            <g transform="translate(0, 0)">
+                <circle cx="12" cy="12" r="6" fill="#FFFFFF"/>
+                <text font-family="Arial, sans-serif" font-size="20" fill="#FFFFFF" x="35" y="18">
+                    Technical discussion highlights
+                </text>
+            </g>
+            
+            <g transform="translate(0, 50)">
+                <circle cx="12" cy="12" r="6" fill="#FFFFFF"/>
+                <text font-family="Arial, sans-serif" font-size="20" fill="#FFFFFF" x="35" y="18">
+                    Quick thread overviews
+                </text>
+            </g>
+            
+            <g transform="translate(0, 100)">
+                <circle cx="12" cy="12" r="6" fill="#FFFFFF"/>
+                <text font-family="Arial, sans-serif" font-size="20" fill="#FFFFFF" x="35" y="18">
+                    Seamless HN integration
+                </text>
+            </g>
+        </g>
+    </g>
+    
+    <!-- Screenshot area with clipping -->
+    <g transform="translate(640, 100)">
+        <defs>
+            <clipPath id="screenshotClip">
+                <rect width="560" height="400" rx="4"/>
+            </clipPath>
+        </defs>
+        
+        <!-- Background frame -->
+        <rect width="560" height="400" fill="#F6F6EF"/>
+        
+        <!-- Your screenshot here -->
+        <image 
+            x="0" 
+            y="0" 
+            width="560" 
+            height="400" 
+            clip-path="url(#screenshotClip)"
+            xlink:href="hn.jpg"
+            preserveAspectRatio="xMidYMid contain"
+        />
+        
+        <!-- HN-style top bar -->
+        <rect x="0" y="0" width="560" height="40" fill="#FF6600"/>
+    </g>
+    
+    <!-- Footer -->
+    <text font-family="Arial, sans-serif" font-size="20" fill="#FFFFFF" x="640" y="750" text-anchor="middle">
+        Get to the core of technical discussions faster
+    </text>
+</svg>
