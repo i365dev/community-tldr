@@ -49,7 +49,7 @@ module.exports = {
           to: "options.html"
         },
         { 
-          from: "src/privacy.html",
+          from: "public/privacy.html",
           to: "privacy.html"
         },
         {
