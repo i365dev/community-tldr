@@ -48,6 +48,10 @@ module.exports = {
           from: "src/options/options.html",
           to: "options.html"
         },
+        { 
+          from: "src/privacy.html",
+          to: "privacy.html"
+        },
         {
           from: "src/styles",
           to: "styles"
