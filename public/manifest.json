@@ -54,8 +54,6 @@
       "service_worker": "background.js",
       "type": "module"
     },
-
-    "privacy_policy_url": "https://media.i365.tech/community-tldr/privacy.html",
   
     "web_accessible_resources": [{
       "resources": ["styles/*", "icons/*"],
