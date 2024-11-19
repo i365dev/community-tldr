@@ -2,10 +2,12 @@
 
 A Chrome extension powered by AI to generate quick summaries of community discussions. Get insights from lengthy threads without reading through everything.
 
+[![Available in the Chrome Web Store](https://storage.googleapis.com/web-dev-uploads/image/WlD8wC6g8khYWPJUsQceQkhXSlv1/UV4C4ybeBTsZt43U4xis.png)](https://chromewebstore.google.com/detail/community-tldr/kikhlploiflbfpdliimemhelcpneobfm)
+
 ## Features
 
 - 🤖 AI-powered discussion summarization
-- 🌐 Multiple community support (currently supports Hacker News, more coming soon)
+- 🌐 Support for major communities (Hacker News, Reddit)
 - 🌍 Multiple language support
   - English
   - Chinese (中文)
@@ -16,54 +18,40 @@ A Chrome extension powered by AI to generate quick summaries of community discus
   - OpenAI API
   - Anthropic Claude
   - Cloudflare AI Worker
-- 📱 Thread-level summaries
+- 📱 Thread-level summaries with side-by-side view
 - 🎯 Focus on key points and insights
-- 📊 Smart content analysis
+- 📊 Smart content analysis and language translation
 
 ## Supported Communities
 
 Currently supported:
 
 - ✅ Hacker News discussions
-- ✅ Reddit
+- ✅ Reddit threads
 
 Coming soon:
-
 - 🔄 Twitter threads
-- 🔄 Slack channels
 - 🔄 GitHub Discussions
 - More suggestions welcome!
 
 ## Installation
 
-Since this extension is not yet available on the Chrome Web Store, follow these steps to install:
+### Chrome Web Store (Recommended)
 
-1. Download the latest release from the [Releases](../../releases) page
-2. Unzip the downloaded file
-3. Open Chrome and go to `chrome://extensions/`
-4. Enable "Developer mode" in the top right
-5. Click "Load unpacked" and select the unzipped folder
+1. Visit the [Chrome Web Store page](https://chromewebstore.google.com/detail/community-tldr/kikhlploiflbfpdliimemhelcpneobfm)
+2. Click "Add to Chrome"
+3. Follow the installation prompts
 
-## Development Setup
+### Manual Installation (Development)
 
-```bash
-# Clone the repository
-git clone https://github.com/yourusername/community-tldr.git
-cd community-tldr
-
-# Install dependencies
-npm install
-
-# Start development build with watch mode
-npm run dev
-
-# Build for production
-npm run build
-```
+1. Clone the repository
+2. Install dependencies: `npm install`
+3. Build: `npm run build`
+4. Load unpacked extension from `dist` folder
 
 ## Configuration
 
-1. After installation, click the extension icon and go to Settings
+1. Click the extension icon and go to Settings
 2. Configure your AI service:
    - Custom Endpoint (recommended)
    - OpenAI
@@ -77,13 +65,15 @@ npm run build
 
 ## Usage
 
-1. Visit a supported community discussion page
-2. Click the extension icon to show the summary sidebar
-3. Use the "TL;DR" button next to threads to summarize them
+1. Visit a supported site (Hacker News or Reddit)
+2. Click the extension icon or use the TL;DR button
+3. Choose summarization options:
+   - Full discussion summary
+   - Individual thread summary
 4. View summaries in the sidebar
-5. Click on summaries to jump to original content
+5. Click summaries to navigate to original content
 
-## Building From Source
+## Development
 
 ```bash
 # Install dependencies
@@ -94,51 +84,51 @@ npm run dev
 
 # Production build
 npm run build
-
-# The built extension will be in the `dist` folder
 ```
 
 ## Contributing
 
-We welcome contributions! Here are some ways you can help:
-
-1. 🐛 Report bugs
-2. 💡 Suggest new features
-3. 🌐 Add support for new communities
-4. 📝 Improve documentation
-5. 🔧 Submit pull requests
-
-### Development Workflow
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+We welcome contributions! See our [Contributing Guide](CONTRIBUTING.md) for:
+- Adding new community support
+- Improving summarization
+- Bug fixes and feature enhancements
+- Documentation improvements
 
 ### Adding Support for New Communities
 
-Interested in adding support for a new community? Check out our [Contributing Guide](CONTRIBUTING.md) for details on:
+Check our [Contributing Guide](CONTRIBUTING.md) for:
 - Architecture overview
-- Adding new parsers
-- Testing guidelines
+- Parser implementation
+- Testing requirements
 - PR submission process
 
-## Future Plans
+## Roadmap
 
-- [ ] Support for more communities
-- [ ] Enhanced summarization options
-- [ ] Offline mode with local AI models
+- [ ] Support for more communities (Twitter, GitHub)
+- [ ] Enhanced summarization algorithms
 - [ ] Custom prompt templates
-- [ ] Summary sharing functionality
-- [ ] Community voting on summaries
+- [ ] Community-driven improvements
+- [ ] Performance optimizations
+
+## Privacy & Security
+
+- No user data collection
+- Local storage for settings only
+- Secure API handling
+- Privacy-focused design
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+MIT License - see [LICENSE](LICENSE) for details.
+
+## Links
+
+- [Chrome Web Store](https://chromewebstore.google.com/detail/community-tldr/kikhlploiflbfpdliimemhelcpneobfm)
+- [GitHub Repository](https://github.com/yourusername/community-tldr)
+- [Report Issues](https://github.com/yourusername/community-tldr/issues)
 
 ## Acknowledgments
 
-- Thanks to all contributors and users
-- Special thanks to the open source community
-- AI providers for making this possible
+- Open source community
+- AI service providers
+- Early users and contributors
