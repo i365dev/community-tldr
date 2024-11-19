@@ -2,7 +2,11 @@
 
 A Chrome extension powered by AI to generate quick summaries of community discussions. Get insights from lengthy threads without reading through everything.
 
-[![Available in the Chrome Web Store](https://storage.googleapis.com/web-dev-uploads/image/WlD8wC6g8khYWPJUsQceQkhXSlv1/UV4C4ybeBTsZt43U4xis.png)](https://chromewebstore.google.com/detail/community-tldr/kikhlploiflbfpdliimemhelcpneobfm)
+Currently released on the [Chrome Web Store](https://chromewebstore.google.com/detail/community-tldr/kikhlploiflbfpdliimemhelcpneobfm).
+
+![](./chrome_store//images//reddit.png)
+![](./chrome_store/images/hn.png)
+![](./chrome_store//images//other.png)
 
 ## Features
 
@@ -116,19 +120,3 @@ Check our [Contributing Guide](CONTRIBUTING.md) for:
 - Local storage for settings only
 - Secure API handling
 - Privacy-focused design
-
-## License
-
-MIT License - see [LICENSE](LICENSE) for details.
-
-## Links
-
-- [Chrome Web Store](https://chromewebstore.google.com/detail/community-tldr/kikhlploiflbfpdliimemhelcpneobfm)
-- [GitHub Repository](https://github.com/yourusername/community-tldr)
-- [Report Issues](https://github.com/yourusername/community-tldr/issues)
-
-## Acknowledgments
-
-- Open source community
-- AI service providers
-- Early users and contributors
