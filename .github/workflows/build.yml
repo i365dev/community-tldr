@@ -34,7 +34,7 @@ jobs:
         zip -r ../community-tldr.zip .
     
     - name: Upload build artifact
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: extension-build
         path: community-tldr.zip
