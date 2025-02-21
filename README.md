@@ -108,11 +108,93 @@ Check our [Contributing Guide](CONTRIBUTING.md) for:
 
 ## Roadmap
 
-- [ ] Support for more communities (Twitter, GitHub)
-- [ ] Enhanced summarization algorithms
-- [ ] Custom prompt templates
-- [ ] Community-driven improvements
-- [ ] Performance optimizations
+## Phase 1: Core Feature Enhancement
+
+### Universal Content Support
+- [ ] Generic webpage & article summarization
+  - Basic article parsing engine
+  - Support for common article layouts
+  - Handling of dynamic content
+- [ ] Email thread summarization
+  - Gmail basic integration
+  - Email thread parser
+  - Plain text email support
+- [ ] Additional community platforms
+  - Twitter/X threads
+  - GitHub Discussions
+  - Stack Overflow Q&A
+
+### Self-hosted Web Version
+- [ ] Basic web application
+  - Docker deployment support
+  - Simple URL input interface
+  - Summary viewing & sharing
+- [ ] Chrome extension sync capability
+  - Local storage sync
+  - Settings synchronization
+  - History sync (optional)
+- [ ] Basic API endpoints
+  - Summary generation
+  - URL processing
+  - Health checks
+
+## Phase 2: Technical Improvements
+
+### Parser Framework Enhancement
+- [ ] Modular parser architecture
+  - Easy addition of new sources
+  - Parser plugin system
+  - Common parsing utilities
+- [ ] Content extraction improvements
+  - Better noise removal
+  - Main content detection
+  - Comment thread handling
+
+### AI Backend Flexibility
+- [ ] Enhanced AI provider support
+  - Improved prompt templates
+  - Better error handling
+  - Failover support
+- [ ] Local AI model support
+  - Basic local model integration
+  - Offline capabilities
+  - Model selection flexibility
+
+## Phase 3: Quality of Life Features
+
+### User Experience
+- [ ] Improved summary formats
+  - Bullet point summaries
+  - Key points extraction
+  - Source linking
+- [ ] Basic customization
+  - Summary length options
+  - Language preferences
+  - Style selection
+
+### Developer Experience
+- [ ] Documentation improvements
+  - Setup guides
+  - API documentation
+  - Contributing guidelines
+- [ ] Development tooling
+  - Testing frameworks
+  - Development containers
+  - Local development setup
+
+## Continuous Improvement
+
+### Core Functionality
+- [ ] Performance optimization
+- [ ] Bug fixes
+- [ ] Code quality improvements
+- [ ] Test coverage expansion
+
+### Community
+- [ ] Issue template refinement
+- [ ] Pull request guidelines
+- [ ] Community support channels
+- [ ] Regular maintenance updates
 
 ## Privacy & Security
 
