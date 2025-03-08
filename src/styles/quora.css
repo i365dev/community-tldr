@@ -1,0 +1,53 @@
+.tldr-summarize-btn {
+    display: inline-block;
+    margin-left: 10px;
+    font-size: 13px;
+    color: #636466;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 4px 8px;
+    border-radius: 3px;
+    transition: background-color 0.2s;
+}
+
+.tldr-summarize-btn:hover {
+    background-color: #f1f1f2;
+}
+
+.tldr-btn-container {
+    display: inline-block;
+    margin-left: 10px;
+}
+
+/* Highlighted answer styling */
+.tldr-highlight {
+    animation: quoraTldrHighlight 3s ease-out;
+}
+
+@keyframes quoraTldrHighlight {
+    0% {
+        background-color: rgba(46, 105, 255, 0.1);
+        box-shadow: 0 0 0 2px rgba(46, 105, 255, 0.3);
+    }
+    70% {
+        background-color: rgba(46, 105, 255, 0.1);
+        box-shadow: 0 0 0 2px rgba(46, 105, 255, 0.3);
+    }
+    100% {
+        background-color: transparent;
+        box-shadow: none;
+    }
+}
+
+/* Sidebar styling specific to Quora */
+.tldr-sidebar .tldr-thread-summary {
+    border-radius: 4px;
+    margin-bottom: 12px;
+    transition: transform 0.2s;
+}
+
+.tldr-sidebar .tldr-thread-summary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}

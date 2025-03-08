@@ -59,6 +59,8 @@ function getSystemPrompt(language) {
             return 'あなたは専門的な議論要約アシスタントです。議論の内容を日本語で要約し、重要なポイント、主な論点、議論の結果に焦点を当ててください。要約は明確で、正確で、包括的である必要があります。';
         case 'korean':
             return '당신은 전문적인 토론 요약 도우미입니다. 토론 내용을 한국어로 요약하고, 주요 논점, 주요 논거, 토론 결과를 중심으로 정리해 주세요. 요약은 명확하고 정확하며 포괄적이어야 합니다.';
+        case 'quora':
+            return 'You are a professional Quora answer summarizer. Please create a concise summary that captures the key information, insights, and evidence from the answer. Format your response as:\n1. Main Points:\n2. Key Insights:\n3. Examples or Evidence:';
         default:
             return 'You are a professional discussion summarizer. Please summarize the discussion clearly, accurately, and comprehensively, focusing on key points, main arguments, and discussion outcomes. Format your response as:\n1. Main Points:\n2. Key Insights:\n3. Discussion Results:';
     }

@@ -1,7 +1,7 @@
 {
     "manifest_version": 3,
     "name": "Community TL;DR",
-    "version": "1.1.3",
+    "version": "1.1.4",
     "description": "AI-powered community discussion summarizer",
     
     "icons": {
@@ -29,6 +29,7 @@
     "host_permissions": [
       "https://news.ycombinator.com/*",
       "*://*.reddit.com/*",
+      "*://*.quora.com/*",
       "https://api.openai.com/*",
       "https://api.anthropic.com/*",
       "https://*.workers.dev/*"
@@ -38,13 +39,15 @@
       {
         "matches": [
           "https://news.ycombinator.com/*",
-          "https://*.reddit.com/*"
+          "https://*.reddit.com/*",
+          "*://*.quora.com/*"
         ],
         "js": ["content.js"],
         "css": [
           "styles/content.css",
           "styles/hn.css",
-          "styles/reddit.css"
+          "styles/reddit.css",
+          "styles/quora.css"
         ]
       }
     ],
@@ -58,7 +61,8 @@
       "resources": ["styles/*", "icons/*"],
       "matches": [
         "https://news.ycombinator.com/*",
-        "https://*.reddit.com/*"
+        "https://*.reddit.com/*",
+        "*://*.quora.com/*"
       ]
     }]
   }

@@ -42,7 +42,8 @@ class PopupManager {
             // Check if current page is supported
             const isHN = this.currentTab.url.includes('news.ycombinator.com');
             const isReddit = this.currentTab.url.includes('reddit.com');
-            const isSupportedSite = isHN || isReddit;
+            const isQuora = this.currentTab.url.includes('quora.com');
+            const isSupportedSite = isHN || isReddit || isQuora;
             
             // Update UI visibility
             document.getElementById('notOnCommunity').style.display = 

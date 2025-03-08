@@ -32,6 +32,7 @@ Currently supported:
 
 - ✅ Hacker News discussions
 - ✅ Reddit threads
+- ✅ Quora answers
 
 Coming soon:
 - 🔄 Twitter threads

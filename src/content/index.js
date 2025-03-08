@@ -1,10 +1,13 @@
 import { RedditSummarizer } from './platforms/RedditSummarizer';
 import { HNSummarizer } from './platforms/HNSummarizer';
+import { QuoraSummarizer } from './platforms/QuoraSummarizer';
 
 const PLATFORM_HANDLERS = {
     'news.ycombinator.com': HNSummarizer,
     'reddit.com': RedditSummarizer,
-    'www.reddit.com': RedditSummarizer
+    'www.reddit.com': RedditSummarizer,
+    'quora.com': QuoraSummarizer,
+    'www.quora.com': QuoraSummarizer
 };
 
 function initializeSummarizer() {
